@@ -1,3 +1,5 @@
+import Feed from '@components/Feed'
+
 const Home = () => {
     return (
         <section className="w-full flex-center
@@ -10,7 +12,7 @@ const Home = () => {
             <p className="desc text-center">
             Welcome to Prompt Zone, your gateway to an endless realm of captivating AI prompts, where inspiration meets imagination and creativity thrives!
             </p>
-            {/*Feed */}
+            <Feed />
         </section>
     )
 }
