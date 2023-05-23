@@ -1,6 +1,7 @@
 import NextAuth from "next-auth/next"
 import GoogleProvider from 'next-auth/providers/google'
-
+import { connectToDB } from "@utils/database"
+import User from "@models/user"
 
 const handler = NextAuth({ 
 
@@ -11,9 +12,36 @@ const handler = NextAuth({
         })
     ],
     async session({ session }){
+        
 
     },
     async signIn({ profile }){
+        try {
+            // serverless -> lambda -> dynamodb
+            await connectToDB()
+
+            //check if user exists
+            const userExists = await User.findOne({
+                email: profile.email
+            })
+
+            if (!userExists) {
+                await User.create({
+                    email: profile.email,
+                    username: profile.name.replace(" ", "").toLowerCase(),
+                    image: profile.picture
+                })
+            }
+
+            //if not make user and save to db
+
+            return true
+        } catch (error) {
+            console.log(error)
+            return false
+
+        }
+
 
     }
 })
