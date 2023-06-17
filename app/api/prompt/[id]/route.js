@@ -5,7 +5,7 @@ import Prompt from '@models/prompt'
 // Get (read) 
 
 export const GET = async (request, { params }) => {
-    
+
     try {
         await connectToDB()
 
@@ -36,12 +36,10 @@ export const PATCH = async (request, { params }) => {
 
         await existingPrompt.save()
 
-        return new Response(JSON.stringify(existingPrompt), {
-            status: 200})
+        return new Response(JSON.stringify(existingPrompt), {status: 200})
 
     } catch (error) {
-        return new Response("failed to update prompts", {
-            status: 500})
+        return new Response("failed to update prompts", {status: 500})
         
     }
 
