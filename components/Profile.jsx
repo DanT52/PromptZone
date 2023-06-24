@@ -8,7 +8,7 @@ const Profile = ( { name, desc, data, handleEdit, handleDelete}) => {
           {name} Profile
         </span>
       </h1>
-      <p className="desc text-left">{desc}</p>
+      <p className="desc text-left dark:text-slate-300">{desc}</p>
 
       <div className="mt-10 prompt_layout">
       

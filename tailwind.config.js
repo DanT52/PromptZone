@@ -5,9 +5,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class', 
   theme: {
     extend: {
       fontFamily: {
+        textColor: ['hover', 'dark'],
         satoshi: ['Helvetica', 'sans-serif'],
         inter: ['Verdana', 'sans-serif'],
       },

@@ -2,6 +2,7 @@ import '@styles/globals.css'
 
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
+import { DarkModeProvider } from '@context/DarkModeContext'
 
 export const metadata = {
     title: "PromptZone",
@@ -9,22 +10,23 @@ export const metadata = {
 }
 
 const RootLayout = ( { children }) => {
-  return (
-    <html>
-        <body>
-            <Provider>
-            <div className='main bg-black'>
-                <div className='gradient'/>
-            </div>
-            <main className='app'>
-                <Nav />
-                {children}
-            </main>
-            </Provider>
-        </body>
-        
-    </html>
-  )
-}
+    return (
+      <DarkModeProvider>
+        <html>
+            <body>
+                <Provider>
+                <div className='main dark:bg-slate-950 '>
+                    <div className=''/>
+                </div>
+                <main className='app '>
+                    <Nav />
+                    {children}
+                </main>
+                </Provider>
+            </body>
+        </html>
+      </DarkModeProvider>
+    )
+  }
 
 export default RootLayout

@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import { Router } from 'next/router'
 import { useRouter } from 'next/navigation'
+import DarkModeToggle from './DarkModeToggle'
 const Nav = () => {
     const {data: session} = useSession()
     const [providers, setProviders ] = useState(null);
@@ -29,19 +30,22 @@ const Nav = () => {
             height={30}
             className='object-contain'/>
 
-            <p className='logo_text'>PromptZone</p>
+            <p className='logo_text dark:text-white'>PromptZone</p>
         </Link>
 
         {/* Desktop navigation*/}
 
-        <div className='sm:flex hidden'>
+        <div className='sm:flex hidden gap-4'>
+          
+        <DarkModeToggle/>
+
             {session?.user ? (
                 <div className='flex gap-3 md:gap-5'>
-                    <Link href="/create-prompt" className='black_btn'>
+                    <Link href="/create-prompt" className='black_btn dark:outline outline-1'>
                         Create Post
                     </Link>
 
-                    <button type='button' onClick={signOut} className='outline_btn'>
+                    <button type='button' onClick={signOut} className='outline_btn dark:text-white dark:border-white'>
                         Sign Out
                     </button>
                     <Link href="/profile">
@@ -60,13 +64,14 @@ const Nav = () => {
                         type='button'
                         key={provider.name}
                         onClick={() => signIn(provider.id)}
-                        className='black_btn'
+                        className='black_btn dark:outline outline-1'
                     >
                         Sign In
                     </button>
                 ))}
                 </>
             )}
+            
 
         </div>
 
@@ -82,19 +87,21 @@ const Nav = () => {
               alt='profile'
               onClick={() => setToggleDropDown(!toggleDropdown)}
             />
+            
 
             {toggleDropdown && (
-              <div className='dropdown'>
+              <div className='dropdown dark:bg-slate-800'>
+                <DarkModeToggle/>
                 <Link
                   href='/profile'
-                  className='dropdown_link'
+                  className='dropdown_link dark:text-slate-300 dark:hover:text-white '
                   onClick={() => setToggleDropDown(false)}
                 >
                   My Profile
                 </Link>
                 <Link
                   href='/create-prompt'
-                  className='dropdown_link'
+                  className='dropdown_link dark:text-slate-300 dark:hover:text-white'
                   onClick={() => setToggleDropDown(false)}
                 >
                   Create Prompt
@@ -131,6 +138,7 @@ const Nav = () => {
                 </>
             )
             }
+            
         </div>
     </nav>
   )
