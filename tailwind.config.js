@@ -5,14 +5,16 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class', 
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        textColor: ['hover', 'dark'],
+        satoshi: ['Helvetica', 'sans-serif'],
+        inter: ['Verdana', 'sans-serif'],
       },
       colors: {
-        'primary-orange': '#FF5722',
+        'primary-orange': '#9422ff',
       }
     },
   },
