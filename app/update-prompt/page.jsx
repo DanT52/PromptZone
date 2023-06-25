@@ -15,6 +15,8 @@ const EditPrompt = () => {
     const [post, setPost] = useState({
         prompt: '',
         tag: '',
+        description: '',
+        showEmail: true,
     })
 
     useEffect(() => {
@@ -27,6 +29,8 @@ const EditPrompt = () => {
             setPost({
                 prompt: data.prompt,
                 tag: data.tag,
+                description: data.description,
+                showEmail: data.showEmail
             })
         }
         if(promptId) getPromptDetails()
@@ -45,7 +49,9 @@ const EditPrompt = () => {
                 method: 'PATCH',
                 body: JSON.stringify({
                     prompt: post.prompt,
-                    tag: post.tag
+                    tag: post.tag,
+                    description: post.description,
+                    showEmail: post.showEmail
                 })
             })
 

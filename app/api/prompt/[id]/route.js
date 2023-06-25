@@ -23,7 +23,7 @@ export const GET = async (request, { params }) => {
 
 //patch
 export const PATCH = async (request, { params }) => {
-    const { prompt, tag } = await request.json()
+    const { prompt, tag, description, showEmail } = await request.json()
 
     try {
         await connectToDB()
@@ -33,6 +33,8 @@ export const PATCH = async (request, { params }) => {
 
         existingPrompt.prompt = prompt
         existingPrompt.tag = tag
+        existingPrompt.description = description
+        existingPrompt.showEmail = showEmail
 
         await existingPrompt.save()
 
