@@ -11,10 +11,23 @@ const PromptSchema = new Schema({
         reqired: [true, 'Prompt is reqired,'],
 
     },
+    description: {
+        type: String,
+        reqired: [false, 'description optional reqired.'],
+    },
     tag: {
         type: String,
         reqired: [true, 'tag is reqired.'],
+    },
+    date: {
+        type: Number,
+        reqired: [true, 'date is reqired']
+    },
+    showEmail: {
+        type: Boolean,
+        reqired: [true, 'option reqired']
     }
+
 })
 
 const Prompt = models.Prompt || model('Prompt', PromptSchema);
