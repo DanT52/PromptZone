@@ -17,7 +17,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
   const [copied, setCopied] = useState("")
 
   const handleProfileClick = () => {
-    console.log(post);
+    
 
     if (post.creator._id === session?.user.id) return router.push("/profile");
 
@@ -29,6 +29,18 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
     navigator.clipboard.writeText(post.prompt)
     setTimeout(()=> setCopied(""), 3000)
   }
+
+  const [showMore, setShowMore] = useState(false)
+
+  
+
+  const needShowMore = (post.description !== '' || post.prompt.length> 300) ? true : false
+
+  const truncatedPost = (needShowMore) ? post.prompt.substring(0, 355) +  ' ...': post.prompt
+
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
+  };
 
   return (
     <div className='prompt_card dark:bg-slate-800'>
@@ -48,13 +60,15 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
               <h3 className='font-satoshi font-semibold text-grey-900 dark:text-slate-300'>
                 {post.creator.username}
               </h3>
+              {post.showEmail && (
               <p className='font-inter text-sm text-gray-500 dark:text-slate-300'>
-                {post.creator.email}
+                 {post.creator.email}
               </p>
+              )}
             </div>
         </div>
 
-        <div className="cpy_btn" onClick={() => handleCopy()}>
+        <div className="cpy_btn cursor-pointer" onClick={() => handleCopy()}>
           <Image
             src={copied === post.prompt 
             ? '/assets/icons/tick.svg'
@@ -64,9 +78,49 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
           />
 
         </div>
+
+
       </div>
-      <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{post.prompt}</p>
-      <p className='font-inter text-sm blue_gradient cursor-pointer'
+
+
+      {showMore ? (
+        <div>
+        <div className='mt-3'>
+          <p className='text-gray-500 dark:text-slate-300 text-sm font-medium'>Prompt:</p>
+        </div>
+        <div className=' border rounded-md border-solid  border-slate-50 px-7'>
+        <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{post.prompt}</p>
+        </div>
+  
+        { post.description !== '' && (
+        <div className='mt-4'>
+          <p className='text-gray-500 dark:text-slate-300 text-sm font-medium'>Description:</p>
+        
+  
+        <div className=' border rounded-md border-solid  border-slate-50 px-7'>
+          <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{post.description}</p>
+        </div>
+        </div>
+        )}
+        </div>
+      ) : (
+        <div>
+          <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{truncatedPost}</p>
+        </div>
+      )}
+
+      {needShowMore && (
+        <div className='flex justify-end'>
+        <button onClick={toggleShowMore} className='dark:text-white text-sm'>
+        {showMore ? 'Show Less ▲' :'Show More ▼' }
+      </button>
+      </div>
+      )}
+      
+
+
+
+      <p className='mt-5 font-inter text-sm blue_gradient cursor-pointer'
         onClick={() => handleTagClick && handleTagClick
         (post.tag)}
       >
@@ -75,9 +129,11 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
 
       {session?.user._id === post.creator.id &&
       pathName === '/profile' && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
+        <div className='mt-5 flex-center gap-4 border-t border-gray-500 dark:border-gray-100 pt-3'>
+
+
           <p
-            className="font-inter text-sm green_gradient cursor-pointer"
+            className="font-inter text-sm text-orange-600 cursor-pointer hover:text-orange-900"
             onClick={handleEdit}
             
           >
@@ -85,7 +141,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
           </p>
 
           <p
-            className="font-inter text-sm orange_gradient cursor-pointer"
+            className="font-inter text-sm text-red-500 cursor-pointer hover:text-red-900"
             onClick={handleDelete}
             
           >
