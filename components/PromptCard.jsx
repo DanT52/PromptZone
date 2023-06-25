@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { usePathname, useRouter } from 'next/navigation'
+import { formatDistanceToNow } from 'date-fns'
 
 
 
@@ -105,7 +106,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
         </div>
       ) : (
         <div>
-          <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{truncatedPost}</p>
+          <p className=' mt-3 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{truncatedPost}</p>
         </div>
       )}
 
@@ -119,13 +120,29 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
       
 
 
+      <div className='flex justify-between'>
+        <div className='flex'>
+          <p className='mx-3 font-inter text-sm text-gray-400 dark:text-slate-500'>catagory: </p>
 
-      <p className='mt-5 font-inter text-sm blue_gradient cursor-pointer'
-        onClick={() => handleTagClick && handleTagClick
-        (post.tag)}
-      >
-        {post.tag}
-      </p>
+          <p className='  font-inter text-sm blue_gradient cursor-pointer'
+            onClick={() => handleTagClick && handleTagClick
+            (post.tag)}
+          >
+            {post.tag}
+          </p>
+        </div>
+        {showMore && (
+          <div>
+          <p className='text-sm text-gray-400 dark:text-slate-500'>
+            Posted {formatDistanceToNow(post.date)} ago.
+          </p>
+        </div>
+
+        )}
+        
+    
+
+      </div>
 
       {session?.user._id === post.creator.id &&
       pathName === '/profile' && (
