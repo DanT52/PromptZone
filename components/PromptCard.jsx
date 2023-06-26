@@ -69,13 +69,13 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
             </div>
         </div>
 
-        <div className="cpy_btn cursor-pointer" onClick={() => handleCopy()}>
+        <div className="cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200  dark:bg-slate-800 dark:hover:bg-slate-700 p-2 rounded-full" onClick={() => handleCopy()}>
           <Image
             src={copied === post.prompt 
             ? '/assets/icons/tick.svg'
             : '/assets/icons/copy.svg'}
-            width={12}
-            height={12}
+            width={15}
+            height={15}
           />
 
         </div>
@@ -84,7 +84,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
       </div>
 
 
-      {showMore ? (
+      {showMore &&  (
         <div>
         <div className='mt-3'>
           <p className='text-gray-500 dark:text-slate-300 text-sm font-medium'>Prompt:</p>
@@ -99,15 +99,23 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
         
   
         <div className='  px-7'>
-          <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{post.description}</p>
+          <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100 '>{post.description}</p>
         </div>
         </div>
         )}
         </div>
-      ) : (
+      ) }
+
+      {(needShowMore && !showMore) &&  (
         <div>
           <p className=' mt-3 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{truncatedPost}</p>
         </div>
+      )}
+      {(!needShowMore)&& (
+        <div>
+          <p className=' my-5  font-satoshi text-sm text-gray-700 dark:text-slate-100'>{truncatedPost}</p>
+        </div>
+
       )}
 
       {needShowMore && (
@@ -131,7 +139,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
             {post.tag}
           </p>
         </div>
-        {showMore && (
+        {(showMore || !needShowMore) && (
           <div>
           <p className='text-sm text-gray-400 dark:text-slate-500'>
             Posted {formatDistanceToNow(post.date)} ago.

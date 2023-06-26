@@ -8,7 +8,7 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
         
       </h1>
       <p className="desc text-left max-w-md dark:text-slate-300">
-        {type} and share amazing prompts! AI POWER!
+        {type} and share your AI prompt!
       </p>
 
       <form onSubmit={handleSubmit} className="mt-10 w-full max-w-2xl flex flex-col gap-6 glassmorphism">
