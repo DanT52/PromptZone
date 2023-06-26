@@ -30,7 +30,7 @@ const Nav = () => {
             height={30}
             className='object-contain'/>
 
-            <p className='logo_text dark:text-white'>PromptZone</p>
+            <p className='logo_text dark:text-purple-300'>Prompt<span className='text-purple-500 dark:text-blue-400'>Zone</span></p>
         </Link>
 
         {/* Desktop navigation*/}
@@ -80,7 +80,7 @@ const Nav = () => {
         {session?.user ? (
           <div className='flex'>
             <Image
-              src={session?.user.image}
+              src="/assets/icons/menu.svg"
               width={37}
               height={37}
               className='rounded-full'
@@ -91,7 +91,7 @@ const Nav = () => {
 
             {toggleDropdown && (
               <div className='dropdown dark:bg-slate-800'>
-                <DarkModeToggle/>
+                
                 <Link
                   href='/profile'
                   className='dropdown_link dark:text-slate-300 dark:hover:text-white '
@@ -106,13 +106,14 @@ const Nav = () => {
                 >
                   New Prompt
                 </Link>
+                <DarkModeToggle/>
                 <button
                   type='button'
                   onClick={() => {
                     setToggleDropDown(false);
                     signOut();
                   }}
-                  className='mt-5 w-full black_btn'
+                  className=' w-full black_btn'
                 >
                   Sign Out
 

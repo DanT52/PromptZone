@@ -89,7 +89,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
         <div className='mt-3'>
           <p className='text-gray-500 dark:text-slate-300 text-sm font-medium'>Prompt:</p>
         </div>
-        <div className=' border rounded-md border-solid  border-slate-50 px-7'>
+        <div className='  px-7'>
         <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{post.prompt}</p>
         </div>
   
@@ -98,7 +98,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
           <p className='text-gray-500 dark:text-slate-300 text-sm font-medium'>Description:</p>
         
   
-        <div className=' border rounded-md border-solid  border-slate-50 px-7'>
+        <div className='  px-7'>
           <p className='my-4 font-satoshi text-sm text-gray-700 dark:text-slate-100'>{post.description}</p>
         </div>
         </div>
