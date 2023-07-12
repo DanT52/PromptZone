@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Catagories from "./Catagories"
 
 const Form = ({type, post, setPost, submitting, handleSubmit}) => {
   return (
@@ -41,18 +42,15 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
         <label htmlFor="">
           <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-slate-300">
             Catagory { ' '}
-            <span className="font-normal dark:text-slate-300"></span>
           </span>
-          <input 
-            value={post.tag}
-            onChange={(e) => setPost({ ...post,
-            tag: e.target.value })}
-            placeholder="webdevelopment or creative-writing ect..."
-            required
-            className="form_input dark:bg-slate-800 dark:text-white"
-
-          />
+          <Catagories 
+        value={post.tag}
+        onChange={(value) => setPost({ ...post, tag: value })}
+         
+        />
+          
         </label>
+        
         <label className="font-satoshi  text-sm text-gray-500 dark:text-blue-200 hover:opacity-90 cursor-pointer">
       <input
         type="checkbox"
