@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
+import Catagories from "./Catagories";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   
@@ -72,7 +73,7 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form className="relative flex-center w-full">
+      <form className=" flex-center w-full z-10">
         <input type="text"
                placeholder="Search for a tag or a username"
                value={searchText}
@@ -80,6 +81,7 @@ const Feed = () => {
                required
                className="search_input peer bg-white dark:bg-slate-800 dark:text-white" 
               />
+        <Catagories/>
       </form>
 
       {searchText ? (
