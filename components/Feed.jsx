@@ -73,15 +73,15 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form className=" flex-center w-full z-10">
+      <form className="flex flex-col sm:flex-row z-10">
         <input type="text"
-               placeholder="Search for a tag or a username"
+               placeholder="Search..."
                value={searchText}
                onChange={handleSearchChange}
                required
                className="search_input peer bg-white dark:bg-slate-800 dark:text-white" 
               />
-        <Catagories/>
+        <Catagories isHome={true}  />
       </form>
 
       {searchText ? (
