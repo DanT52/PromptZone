@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
 import Catagories from "./Catagories";
+import Image from "next/image";
+import ShowMore from "./ShowMore";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   
@@ -25,79 +27,118 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   
   const [allPosts, setAllPosts] = useState([]);
+  const [loading, setLoading] = useState(false)
+
+  const [limit, setLimit] = useState(10)
 
   const [searchText, setSearchText] = useState('')
-  const [searchTimeout, setSearchTimeout] = useState(null)
-  const [searchResults, setSearchedResults] = useState([])
-  
+  const [searchCat, setSearchCat] = useState('')
+
+  const [catVal, setCatVal] = useState('All Categories')
+
+
+
+
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
-    const data = await response.json();
+    setLoading(true)
 
-    setAllPosts(data);
+    try {
+      const response = await fetch(`/api/prompt?category=${searchCat||""}&text=${searchText||""}&limit=${limit||10}`);
+      const data = await response.json();
+
+      setAllPosts(data);
+      
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+    
   };
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [searchText, searchCat, limit]);
 
-  const filterPrompts = (searchtext) => {
-    const regex = new RegExp(searchtext, "i")
-    return allPosts.filter(
-      (item) =>
-      regex.test(item.creator.username)||
-      regex.test(item.tag) ||
-      regex.test(item.prompt)
-    )
-  }
+
 
   const handleSearchChange = (e) => {
-    clearTimeout(searchTimeout)
+    
     setSearchText(e.target.value)
-
-    setSearchTimeout(
-      setTimeout(() => {
-        const searchResult = filterPrompts(e.target.value)
-        setSearchedResults(searchResult)
-      }, 500)
-    )
+    setLimit(10)
 
   }
 
   const handleTagClick = (tagName) => {
-    setSearchText(tagName)
-    const searchResult = filterPrompts(tagName)
-    setSearchedResults(searchResult)
+    setSearchCat(tagName)
+    setCatVal(tagName)
+    setLimit(10)
   }
+
+  const setCatagory = (value) => {
+    setLimit(10)
+    if (value ==="All Categories"){
+      setSearchCat("")
+    }else{
+      setSearchCat(value)
+    }
+  }
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <section className="feed">
-      <form className="flex flex-col sm:flex-row z-10">
+      <form onSubmit={handleFormSubmit} className="flex flex-col sm:flex-row z-10">
         <input type="text"
                placeholder="Search..."
                value={searchText}
                onChange={handleSearchChange}
-               required
+      
                className="search_input peer bg-white dark:bg-slate-800 dark:text-white" 
               />
-        <Catagories isHome={true}  />
+        <Catagories isHome={true}  value={catVal} onChange={(value) => setCatagory(value)}  />
       </form>
 
-      {searchText ? (
-        <PromptCardList
-        data={searchResults}
-        handleTagClick={() =>{}}
-
+      {
+  loading && limit === 10 ? (
+    <div className='mt-16 w-full flex-center'>
+      <Image 
+        src="assets\icons\loader.svg"
+        alt='loading'
+        width={50}
+        height={50}
+        className='object-contain'
       />
+    </div>
+  ) : allPosts.length < 1 ? (
+    <div>
+       <h2 className='text-black dark:text-white text-xl font-bold mt-10'> Opps, no results...</h2>
+    </div>
+  ) : (
+    <PromptCardList
+      data={allPosts}
+      handleTagClick={handleTagClick}
+    />
+  )
+}
 
-      ): (
-        <PromptCardList
-        data={allPosts}
-        handleTagClick={handleTagClick}
 
-      />
-      )}
+    {!loading && (
+      <ShowMore 
+      pageNumber={limit / 10}
+      isNext={limit  > allPosts.length}
+      setLimit={setLimit}
+        />
+
+    )}
+    
+    
+
+      
+        
+      
       
     </section>
 
