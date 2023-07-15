@@ -13,9 +13,10 @@ const CreatePrompt = () => {
     const [submitting, setSubmitting] = useState(false)
     const [post, setPost] = useState({
         prompt: '',
-        tag: '',
+        tag: 'Inspirational',
         description: '',
         showEmail: true,
+        author: ''
     })
 
     const createPrompt = async (e) => {
@@ -33,6 +34,7 @@ const CreatePrompt = () => {
                     description: post.description,
                     date: Date.now(),
                     showEmail: post.showEmail,
+                    author: post.author,
                 })
             })
 

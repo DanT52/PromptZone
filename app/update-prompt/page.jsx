@@ -17,6 +17,7 @@ const EditPrompt = () => {
         tag: '',
         description: '',
         showEmail: true,
+        author: ''
     })
 
     useEffect(() => {
@@ -30,7 +31,8 @@ const EditPrompt = () => {
                 prompt: data.prompt,
                 tag: data.tag,
                 description: data.description,
-                showEmail: data.showEmail
+                showEmail: data.showEmail,
+                author: data.author
             })
         }
         if(promptId) getPromptDetails()
@@ -51,7 +53,8 @@ const EditPrompt = () => {
                     prompt: post.prompt,
                     tag: post.tag,
                     description: post.description,
-                    showEmail: post.showEmail
+                    showEmail: post.showEmail,
+                    author: post.author
                 })
             })
 

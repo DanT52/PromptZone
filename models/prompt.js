@@ -26,6 +26,10 @@ const PromptSchema = new Schema({
     showEmail: {
         type: Boolean,
         reqired: [true, 'option reqired']
+    },
+    author: {
+        type: String,
+        reqired: [true, 'author is reqired']
     }
 
 })

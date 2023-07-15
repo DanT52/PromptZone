@@ -9,10 +9,7 @@ export const GET = async (req) => {
 
     
     
-    console.log(req.nextUrl.searchParams.get("category"));
-    console.log(req.nextUrl.searchParams.get("text"));
-    console.log(req.nextUrl.searchParams.get("username"));
-    console.log(req.nextUrl.searchParams.get("limit") || 10);
+    
 
     // const {
     //   category, // Category corresponds to the 'tag' field in the posts
@@ -44,6 +41,7 @@ export const GET = async (req) => {
       query.$or = [
         { prompt: new RegExp(text, 'i') },
         { description: new RegExp(text, 'i') },
+        { author: new RegExp(text, 'i') },
       ]
     }
 

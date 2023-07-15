@@ -8,7 +8,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 
 
-const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
+const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAuthorClick}) => {
 
   const {data: session} = useSession()
   const pathName = usePathname()
@@ -27,7 +27,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
 
   const handleCopy = () => {
     setCopied(post.prompt)
-    navigator.clipboard.writeText(post.prompt)
+    navigator.clipboard.writeText(` "${post.prompt}" \n -${post.author}`)
     setTimeout(()=> setCopied(""), 3000)
   }
 
@@ -42,6 +42,8 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
   const toggleShowMore = () => {
     setShowMore(!showMore);
   };
+
+ 
 
   return (
     <div className='prompt_card dark:bg-slate-800'>
@@ -130,7 +132,16 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
 
       <div className='flex justify-between'>
         <div className='flex'>
-          <p className='mx-3 font-inter text-sm text-gray-400 dark:text-slate-500'>catagory: </p>
+
+          <p className='mx-2 font-inter text-sm text-gray-400 dark:text-slate-500'>author: </p>
+
+          <p className='  font-inter text-sm orange_gradient cursor-pointer'
+            onClick={() => handleAuthorClick && handleAuthorClick(post.author)}
+          >
+            {post.author}
+          </p>
+
+          <p className='ml-[30px] mx-3 font-inter text-sm text-gray-400 dark:text-slate-500'>catagory: </p>
 
           <p className='  font-inter text-sm blue_gradient cursor-pointer'
             onClick={() => handleTagClick && handleTagClick
@@ -138,6 +149,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete}) => {
           >
             {post.tag}
           </p>
+          
         </div>
         {(showMore || !needShowMore) && (
           <div>

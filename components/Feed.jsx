@@ -7,7 +7,7 @@ import Catagories from "./Catagories";
 import Image from "next/image";
 import ShowMore from "./ShowMore";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick, handleAuthorClick }) => {
   
   return (
     <div className="mt-16 prompt_layout">
@@ -17,6 +17,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
+          handleAuthorClick={handleAuthorClick}
 
         />
       ))}
@@ -73,7 +74,16 @@ const Feed = () => {
   const handleTagClick = (tagName) => {
     setSearchCat(tagName)
     setCatVal(tagName)
+    setSearchText("")
     setLimit(10)
+  }
+
+  const handleAuthorClick = (author) => {
+    setSearchText(author)
+    setSearchCat("")
+    setCatVal("All Categories")
+    setLimit(10)
+    
   }
 
   const setCatagory = (value) => {
@@ -120,6 +130,7 @@ const Feed = () => {
     <PromptCardList
       data={allPosts}
       handleTagClick={handleTagClick}
+      handleAuthorClick={handleAuthorClick}
     />
   )
 }
@@ -131,6 +142,19 @@ const Feed = () => {
       isNext={limit  > allPosts.length}
       setLimit={setLimit}
         />
+
+    )}
+    {(loading && limit > 10) && (
+      <div className='w-full flex-center'>
+      <Image 
+        src="assets\icons\loader.svg"
+        alt='loading'
+        width={30}
+        height={30}
+        className='object-contain'
+      />
+    </div>
+
 
     )}
     

@@ -26,7 +26,21 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
             className="resize-none form_textarea dark:bg-slate-800 dark:text-white"
 
           />
-          <div className=" pt-10 font-satoshi font-semibold text-base text-gray-700 dark:text-slate-300">
+          <div className=" pt-2 font-satoshi font-semibold text-base text-gray-700 dark:text-slate-300">
+            Author
+          </div>
+          <textarea 
+            value={post.author}
+            required
+            onChange={(e) => setPost({ ...post,
+            author: e.target.value })}
+            placeholder="Who the quote was said or written by..."
+            
+            className="resize-none w-full h-7 flex rounded-lg p-1  text-sm text-gray-500 outline-0 dark:bg-slate-800 dark:text-white"
+
+          />
+
+          <div className=" pt-4 font-satoshi font-semibold text-base text-gray-700 dark:text-slate-300">
             Description
           </div>
           <textarea 
@@ -35,7 +49,7 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
             description: e.target.value })}
             placeholder="Describe what your prompt does or include a sample output (optional)..."
             
-            className="form_textarea dark:bg-slate-800 dark:text-white"
+            className="form_textarea resize-none dark:bg-slate-800 dark:text-white"
 
           />
         </label>
