@@ -14,6 +14,10 @@ const UserSchema = new Schema({
     image: {
         type: String,
 
+    },
+    savedPosts: {
+        type: Array,
+        required: [true, "list is reqired"]
     }
 })
 

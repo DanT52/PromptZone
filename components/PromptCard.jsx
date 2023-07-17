@@ -16,6 +16,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
 
 
   const [copied, setCopied] = useState("")
+  const [saved, setSaved] = useState(post.usersSaved.includes(session?.user.id))
 
   const handleProfileClick = () => {
     
@@ -30,6 +31,59 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
     navigator.clipboard.writeText(` "${post.prompt}" \n -${post.author}`)
     setTimeout(()=> setCopied(""), 3000)
   }
+
+  const handleSave = async (e) => {
+
+    if (saved) {
+      try {
+
+        await fetch(`/api/prompt/save/unsave`,
+        {
+            method: 'PATCH',
+            body: JSON.stringify({
+                userId: session?.user.id,
+                postId: post._id,
+            })
+        })
+
+
+
+    }catch (error) {
+
+        console.log(error)
+
+    } 
+
+
+      setSaved(false)
+    } else {
+      try {
+
+        await fetch(`/api/prompt/save`,
+        {
+            method: 'PATCH',
+            body: JSON.stringify({
+                userId: session?.user.id,
+                postId: post._id,
+            })
+        })
+
+
+
+    }catch (error) {
+
+        console.log(error)
+
+    } 
+
+      setSaved(true)
+    }
+
+    
+    
+    
+
+}
 
   const [showMore, setShowMore] = useState(false)
 
@@ -81,6 +135,17 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
           />
 
         </div>
+        <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-2 rounded-full" onClick={() => handleSave()}>
+  <Image
+    src={saved ? '/assets/icons/bookmark-solid.svg' : '/assets/icons/bookmark-regular.svg'}
+    className="icon-purple"
+    width={12}
+    height={12}
+  />
+ 
+</div>
+
+
 
 
       </div>

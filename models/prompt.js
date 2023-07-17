@@ -30,6 +30,10 @@ const PromptSchema = new Schema({
     author: {
         type: String,
         reqired: [true, 'author is reqired']
+    },
+    usersSaved: {
+        type: Array,
+        reqired: [true, "users saved is reqired"]
     }
 
 })
