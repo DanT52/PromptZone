@@ -47,7 +47,7 @@ const MyProfile = () => {
 
 
   const handleEdit = (post) => {
-    router.push(`/update-prompt?id=${post._id}`)
+    router.push(`/update-quote?id=${post._id}`)
 
   }
 

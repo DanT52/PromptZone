@@ -5,23 +5,23 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_text text-left">
-        <span className="blue_gradient"> {type} Post </span>
+        <span className="blue_gradient"> {type} Quote </span>
         
       </h1>
       <p className="desc text-left max-w-md dark:text-slate-300">
-        {type} and share your AI prompt!
+        {type} and share your quote!
       </p>
 
       <form onSubmit={handleSubmit} className="mt-10 w-full max-w-2xl flex flex-col gap-6 glassmorphism">
         <label htmlFor="">
           <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-slate-300">
-            Your Prompt
+            Your Quote
           </span>
           <textarea 
             value={post.prompt}
             onChange={(e) => setPost({ ...post,
             prompt: e.target.value })}
-            placeholder="Write (or paste) Your prompt here..."
+            placeholder="Write or paste the quote here..."
             required
             className="resize-none form_textarea dark:bg-slate-800 dark:text-white"
 
@@ -47,7 +47,7 @@ const Form = ({type, post, setPost, submitting, handleSubmit}) => {
             value={post.description}
             onChange={(e) => setPost({ ...post,
             description: e.target.value })}
-            placeholder="Describe what your prompt does or include a sample output (optional)..."
+            placeholder="Describe the context or why the author may have said the quote (optional)..."
             
             className="form_textarea resize-none dark:bg-slate-800 dark:text-white"
 

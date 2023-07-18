@@ -5,8 +5,8 @@ import Provider from '@components/Provider'
 import { DarkModeProvider } from '@context/DarkModeContext'
 
 export const metadata = {
-    title: "PromptZone",
-    description: 'Discover and find cool AI prompts'
+    title: "QuoteZone",
+    description: 'Discover and find cool quotes'
 }
 
 const RootLayout = ( { children }) => {
