@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Profile from '@components/Profile'
+import Image from 'next/image'
+import ShowMore from '@components/ShowMore'
 
 
 
@@ -12,27 +14,64 @@ const MyProfile = ( {params }) => {
 
     const [posts, setPosts] = useState([])
 
+    const [shownPosts, setShownPosts] = useState([])
+
+    const [loading, setLoading] = useState(true)
+    const [limit, setLimit] = useState(10)
+
   
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true)
       const response = await fetch(`/api/users/${params?.id}/posts`);
       const data = await response.json();
   
       setPosts(data);
+      setShownPosts(data.slice(0,limit))
+      setLoading(false)
     };
     if(params?.id)fetchPosts();
   }, [params?.id]);
 
+  useEffect(() => {
+    setShownPosts(posts.slice(0,limit))
+  }, [limit])
+
  
 
   return (
-    <Profile
-      name={userName}
-      desc={`Welcome to your ${userName}'s  profile page`}
-      data={posts}
+
+    <div>
+       <Profile
+      name={`${userName}'s`}
+      desc={`Welcome to ${userName}'s  profile page`}
+      data={shownPosts}
       
     />
+
+{loading && (
+      <div className=' w-full flex-center'>
+      <Image 
+        src="assets\icons\loader.svg"
+        alt='loading'
+        width={50}
+        height={50}
+        className='object-contain'
+      />
+    </div>
+    )}
+
+<ShowMore 
+      pageNumber={limit / 10}
+      isNext={limit  > shownPosts.length}
+      setLimit={setLimit}
+        />
+
+    </div>
+
+   
+    
   )
 }
 

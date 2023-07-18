@@ -26,13 +26,13 @@ const Nav = () => {
     
   return (
     <nav className="flex-between w-full mb-16 pt-3">
-        <Link href="/" className=' flex gap-2 flex-center' >
+        <Link href="/" className=' flex gap-2 flex-center'  >
             <Image src="/assets/images/logo.svg" alt="PromptZone logo"
             width={30}
             height={30}
             className='object-contain'/>
 
-            <p className='logo_text dark:text-purple-300'>Prompt<span className='text-purple-500 dark:text-blue-400'>Zone</span></p>
+            <p className='logo_text dark:text-purple-300'>Quote<span className='text-purple-500 dark:text-blue-400'>Zone</span></p>
         </Link>
 
         {/* Desktop navigation*/}
@@ -44,7 +44,10 @@ const Nav = () => {
             {session?.user ? (
                 <div className='flex gap-3 md:gap-5'>
                     <Link href="/create-prompt" className='black_btn dark:outline outline-1'>
-                        New Prompt
+                        New Quote
+                    </Link>
+                    <Link href="/profile/saved" className='black_btn dark:outline outline-1'>
+                        Saved Quotes
                     </Link>
 
                     <button type='button' onClick={signOut} className='outline_btn dark:text-white dark:border-white'>
@@ -101,6 +104,14 @@ const Nav = () => {
                 >
                   My Profile
                 </Link>
+                <Link
+                  href='/profile/saved'
+                  className='dropdown_link dark:text-slate-300 dark:hover:text-white '
+                  onClick={() => setToggleDropDown(false)}
+                >
+                  Saved Quotes
+                </Link>
+                
                 <Link
                   href='/create-prompt'
                   className='dropdown_link dark:text-slate-300 dark:hover:text-white'

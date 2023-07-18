@@ -135,15 +135,20 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
           />
 
         </div>
-        <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-2 rounded-full" onClick={() => handleSave()}>
-  <Image
-    src={saved ? '/assets/icons/bookmark-solid.svg' : '/assets/icons/bookmark-regular.svg'}
-    className="icon-purple"
-    width={12}
-    height={12}
-  />
- 
-</div>
+
+        {session?.user && (
+          <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-2 rounded-full" onClick={() => handleSave()}>
+          <Image
+            src={saved ? '/assets/icons/bookmark-solid.svg' : '/assets/icons/bookmark-regular.svg'}
+            className="icon-purple"
+            width={12}
+            height={12}
+          />
+         
+        </div>
+
+        )}
+        
 
 
 

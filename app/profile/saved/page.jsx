@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import PromptCard from '@components/PromptCard'
 import ShowMore from '@components/ShowMore'
+import Image from 'next/image'
 
 
 
@@ -12,23 +12,26 @@ import ShowMore from '@components/ShowMore'
 
 const MyProfile = () => {
 
-  const router = useRouter()
+  
 
   const { data: session } = useSession()
 
   const [posts, setPosts] = useState([])
   
   const [limit, setLimit] = useState(10)
+  const [loading, setLoading] = useState(true)
 
   
 
   useEffect(() => {
     const fetchPosts = async () => {
+
+        setLoading(true)
       const response = await fetch(`/api/prompt/getsaved?userId=${session?.user.id}&limit=${limit||10}`);
       const data = await response.json();
   
       setPosts(data);
-      console.log(limit)
+      setLoading(false)
     };
     if(session?.user.id)fetchPosts();
   }, [session?.user.id, limit]);
@@ -61,12 +64,26 @@ const MyProfile = () => {
       <p className="mt-5 text-lg text-gray-600  text-center dark:text-slate-300">Welcome to your saved quotes.</p>
 
       <div className="mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2">
+        
       
       <PromptCardList
       data={posts}
 
     />
     </div>
+
+    {loading && (
+      <div className=' w-full flex-center'>
+      <Image 
+        src="assets\icons\loader.svg"
+        alt='loading'
+        width={50}
+        height={50}
+        className='object-contain'
+      />
+    </div>
+    )}
+
     <ShowMore 
       pageNumber={limit / 10}
       isNext={limit  > posts.length}
