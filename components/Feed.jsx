@@ -125,9 +125,9 @@ const Feed = () => {
         
         
         
-        className="w-5 bg-red-100 border-red-300 text-red-500 focus:ring-red-200"
+        className="w-4 bg-red-100 border-red-300 text-red-500 focus:ring-red-200"
       />
-       <h2 className='ml-3 text-slate-600 dark:text-white text-base font-bold'> Sort by Most Saved</h2>
+       <h2 className='ml-3 text-slate-600 dark:text-white text-sm '> Sort by Most Saved</h2>
 </div>
       
 

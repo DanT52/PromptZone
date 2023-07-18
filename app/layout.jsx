@@ -13,6 +13,7 @@ const RootLayout = ( { children }) => {
     return (
       <DarkModeProvider>
         <html>
+        <link rel="shortcut icon" href="/assets/images/logo.ico" />
             <body>
                 <Provider>
                 <div className='main dark:bg-slate-950 '>
