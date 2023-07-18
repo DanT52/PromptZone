@@ -10,7 +10,7 @@ import ShowMore from "./ShowMore";
 const PromptCardList = ({ data, handleTagClick, handleAuthorClick }) => {
   
   return (
-    <div className="mt-16 prompt_layout">
+    <div className="mt-5 prompt_layout">
       
       {data.map((post) =>(
         <PromptCard
@@ -34,6 +34,7 @@ const Feed = () => {
 
   const [searchText, setSearchText] = useState('')
   const [searchCat, setSearchCat] = useState('')
+  const [sortSaved, setSortSaved] = useState(false)
 
   const [catVal, setCatVal] = useState('All Categories')
 
@@ -45,7 +46,7 @@ const Feed = () => {
     setLoading(true)
 
     try {
-      const response = await fetch(`/api/prompt?category=${searchCat||""}&text=${searchText||""}&limit=${limit||10}`);
+      const response = await fetch(`/api/prompt?category=${searchCat||""}&text=${searchText||""}&limit=${limit||10}&mostSaved=${sortSaved||false}`);
       const data = await response.json();
 
       setAllPosts(data);
@@ -60,7 +61,7 @@ const Feed = () => {
 
   useEffect(() => {
     fetchPosts();
-  }, [searchText, searchCat, limit]);
+  }, [searchText, searchCat, limit, sortSaved]);
 
 
 
@@ -98,6 +99,11 @@ const Feed = () => {
     event.preventDefault();
   };
 
+  const handleSortChange = () => {
+    const temp = !sortSaved
+    setSortSaved(temp)
+  }
+
   return (
     <section className="feed">
       <form onSubmit={handleFormSubmit} className="flex flex-col sm:flex-row z-10">
@@ -106,10 +112,24 @@ const Feed = () => {
                value={searchText}
                onChange={handleSearchChange}
       
-               className="search_input peer bg-white dark:bg-slate-800 dark:text-white" 
+               className="search_input peer placeholder-slate-800 dark:placeholder-slate-200 bg-white dark:bg-slate-800 dark:text-white" 
               />
         <Catagories isHome={true}  value={catVal} onChange={(value) => setCatagory(value)}  />
       </form>
+
+<div className="flex flex-row">
+<input
+        type="checkbox"
+        onChange={handleSortChange}
+        
+        
+        
+        
+        className="w-5 bg-red-100 border-red-300 text-red-500 focus:ring-red-200"
+      />
+       <h2 className='ml-3 text-slate-600 dark:text-white text-base font-bold'> Sort by Most Saved</h2>
+</div>
+      
 
       {
   loading && limit === 10 ? (

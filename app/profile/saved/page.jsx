@@ -84,6 +84,10 @@ const MyProfile = () => {
     </div>
     )}
 
+    {(posts.length === 0 && !loading) && (
+         <h2 className='w-full flex-center text-black dark:text-white text-xl font-bold mt-10'> Opps, no saved quotes...</h2>
+    )}
+
     <ShowMore 
       pageNumber={limit / 10}
       isNext={limit  > posts.length}

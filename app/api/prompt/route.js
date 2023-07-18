@@ -22,10 +22,12 @@ export const GET = async (req) => {
     const text = req.nextUrl.searchParams.get("text");
     const username = req.nextUrl.searchParams.get("username");
     const limit = req.nextUrl.searchParams.get("limit") || 10;
+    const mostSaved = req.nextUrl.searchParams.get("mostSaved") || "false";
     
 
 
     let query = {}
+    let prompts = []
 
     // If category is provided, filter by tag
     if (category) query.tag = category
@@ -45,10 +47,26 @@ export const GET = async (req) => {
       ]
     }
 
-    const prompts = await Prompt
+    if (mostSaved ==="true" ) {
+      prompts = await Prompt
+      .find(query)
+      .populate('creator')
+
+      prompts.sort((a, b) => b.usersSaved.length - a.usersSaved.length)
+
+      prompts = prompts.slice(0, limit)
+
+      
+
+    } else {
+      prompts = await Prompt
       .find(query)
       .limit(Number(limit))
       .populate('creator')
+
+    }
+
+    
     
     return new Response(JSON.stringify(prompts), { status: 200 })
 

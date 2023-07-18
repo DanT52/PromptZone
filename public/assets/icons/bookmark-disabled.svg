@@ -1,0 +1,10 @@
+<svg width="384" height="512" xmlns="http://www.w3.org/2000/svg">
+ <!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+
+ <g>
+  <title>Layer 1</title>
+  <path stroke="null" fill="#645A73" id="svg_1" d="m28,60.5309c0,-24.58478 18.8125,-44.53092 42,-44.53092l0,44.53092l0,364.96796l113.8375,-86.18588c7.2625,-5.56636 17.15,-5.56636 24.4125,0l113.75,86.18588l0,-364.96796l-252,0l0,-44.53092l252,0c23.1875,0 42,19.94614 42,44.53092l0,408.20006c0,8.34955 -4.375,15.95691 -11.375,19.76059s-15.4,3.15427 -21.7875,-1.66991l-134.8375,-102.05001l-134.8375,102.05001c-6.3875,4.82418 -14.7875,5.47359 -21.7875,1.66991s-11.375,-11.41105 -11.375,-19.76059l0,-408.20006z"/>
+  <line stroke="null" id="svg_2" y2="378" x2="199" y1="397" x1="-86" fill="none"/>
+  <rect transform="rotate(-31.0991 176.971 243.898)" stroke="null" id="svg_3" height="25" width="526.54695" y="231.39829" x="-86.30265" fill="#8B4D4B"/>
+ </g>
+</svg>

@@ -101,7 +101,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
 
   return (
     <div className='prompt_card dark:bg-slate-800'>
-      <div className='flex justify-between items-start gap-5'>
+      <div className='flex justify-between items-start gap-2'>
         <div
           onClick={handleProfileClick}
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
@@ -125,7 +125,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
             </div>
         </div>
 
-        <div className="cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200  dark:bg-slate-800 dark:hover:bg-slate-700 p-2 rounded-full" onClick={() => handleCopy()}>
+        <div className="cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200  dark:bg-slate-800 dark:hover:bg-slate-700 p-0 rounded-full mr-2" onClick={() => handleCopy()}>
           <Image
             src={copied === post.prompt 
             ? '/assets/icons/tick.svg'
@@ -136,8 +136,8 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
 
         </div>
 
-        {session?.user && (
-          <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-2 rounded-full" onClick={() => handleSave()}>
+        {session?.user ? (
+          <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-0 rounded-full" onClick={() => handleSave()}>
           <Image
             src={saved ? '/assets/icons/bookmark-solid.svg' : '/assets/icons/bookmark-regular.svg'}
             className="icon-purple"
@@ -146,8 +146,25 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
           />
          
         </div>
+      
+
+        ) : (
+          <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-0 rounded-full" onClick={() => alert("Login to bookmark quotes.")}>
+          <Image
+            src={'/assets/icons/bookmark-disabled.svg'}
+            className="icon-purple"
+            width={12}
+            height={12}
+          />
+         
+        </div>
+
 
         )}
+
+        <div>
+          <p className='text-black dark:text-white text-xs'> {post.usersSaved.length}</p>
+        </div>
         
 
 
