@@ -144,7 +144,7 @@ const Feed = () => {
     </div>
   ) : allPosts.length < 1 ? (
     <div>
-       <h2 className='text-black dark:text-white text-xl font-bold mt-10'> Opps, no results...</h2>
+       <h2 className='text-black dark:text-white text-xl font-bold mt-10'> No results...</h2>
     </div>
   ) : (
     <PromptCardList
