@@ -1,7 +1,6 @@
 //patch
 
 import { connectToDB } from "@utils/database";
-import User from '@models/user'
 import Prompt from "@models/prompt";
 
 

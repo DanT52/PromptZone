@@ -11,12 +11,7 @@ export const GET = async (req) => {
     
     
 
-    // const {
-    //   category, // Category corresponds to the 'tag' field in the posts
-    //   text, // Full-text search parameter
-    //   username, // Corresponds to a user's 'username'
-    //   limit = 10, // Default limit to 10 documents
-    // } = null
+  
 
     const category = req.nextUrl.searchParams.get("category");
     const text = req.nextUrl.searchParams.get("text");
