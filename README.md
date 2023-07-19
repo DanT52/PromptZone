@@ -1,6 +1,3 @@
-Sure! Here's a template for your README file:
-
-```markdown
 # QuoteZone
 
 QuoteZone is a website for sharing, finding, and saving quotes that you find interesting.
