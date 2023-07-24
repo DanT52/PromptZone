@@ -17,6 +17,8 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
 
   const [copied, setCopied] = useState("")
   const [saved, setSaved] = useState(post.usersSaved.includes(session?.user.id))
+  const [savedCount, setSavedCount] = useState(post.usersSaved.length)
+  const [savedLoading, setSavedLoading] = useState(false)
 
   const handleProfileClick = () => {
     
@@ -33,8 +35,12 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
   }
 
   const handleSave = async (e) => {
+    if (savedLoading){
+      return
+    }
 
     if (saved) {
+      setSavedLoading(true)
       try {
 
         await fetch(`/api/prompt/save/unsave`,
@@ -56,7 +62,10 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
 
 
       setSaved(false)
+      setSavedLoading(false)
+      setSavedCount(savedCount-1)
     } else {
+      setSavedLoading(true)
       try {
 
         await fetch(`/api/prompt/save`,
@@ -77,6 +86,8 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
     } 
 
       setSaved(true)
+      setSavedLoading(false)
+      setSavedCount(savedCount+1)
     }
 
     
@@ -139,7 +150,11 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
         {session?.user ? (
           <div className=" cpy_btn cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 p-0 rounded-full" onClick={() => handleSave()}>
           <Image
-            src={saved ? '/assets/icons/bookmark-solid.svg' : '/assets/icons/bookmark-regular.svg'}
+            src={savedLoading
+              ? '/assets/icons/loader.svg'
+              : (saved) ? 
+              '/assets/icons/bookmark-solid.svg' 
+              : '/assets/icons/bookmark-regular.svg'}
             className="icon-purple"
             width={12}
             height={12}
@@ -163,7 +178,7 @@ const PromptCard = ( { post, handleTagClick, handleEdit, handleDelete, handleAut
         )}
 
         <div>
-          <p className='text-black dark:text-white text-xs'> {post.usersSaved.length}</p>
+          <p className='text-black dark:text-white text-xs'> {savedCount}</p>
         </div>
         
 
